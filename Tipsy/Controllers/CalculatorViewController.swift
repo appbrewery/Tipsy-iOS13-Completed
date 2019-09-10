@@ -23,7 +23,6 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func tipChanged(_ sender: UIButton) {
         
-        //Dismiss the keyboard when the user chooses one of the tip values.
         billTextField.endEditing(true)
         
         zeroPctButton.isSelected = false
@@ -51,63 +50,17 @@ class CalculatorViewController: UIViewController {
             let result = billTotal * (1 + tip) / Double(numberOfPeople)
             finalResult = String(format: "%.2f", result)
         }
-        
-        //In Main.storyboard there is a segue between CalculatorVC and ResultsVC with the identifier "goToResults".
-        //This line triggers the segue to happen.
         self.performSegue(withIdentifier: "goToResults", sender: self)
     }
     
-    //This method gets triggered just before the segue starts. 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        //If the currently triggered segue is the "goToResults" segue.
         if segue.identifier == "goToResults" {
             
-            //Get hold of the instance of the destination VC and type cast it to a ResultViewController.
             let destinationVC = segue.destination as! ResultsViewController
-            
-            //Set the destination ResultsViewController's properties.
             destinationVC.result = finalResult
             destinationVC.tip = Int(tip * 100)
             destinationVC.split = numberOfPeople
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
